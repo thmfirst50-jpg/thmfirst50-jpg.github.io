@@ -1,3 +1,10 @@
 /.quarto/
 /_site/
+/venv/
+/posts/
+/_freeze/
+*.yml
+.nojekyll
+*.qmd
+*.css
 **/*.quarto_ipynb
