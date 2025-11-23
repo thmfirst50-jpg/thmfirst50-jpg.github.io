@@ -8,3 +8,4 @@
 *.qmd
 *.css
 **/*.quarto_ipynb
+*.jpg
