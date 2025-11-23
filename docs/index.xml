@@ -6,15 +6,15 @@
       version="2.0">
 <channel>
 <title>Blog</title>
-<link>https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/</link>
-<atom:link href="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/index.xml" rel="self" type="application/rss+xml"/>
+<link>https://thmfirst50-jpg.github.io/</link>
+<atom:link href="https://thmfirst50-jpg.github.io/index.xml" rel="self" type="application/rss+xml"/>
 <description>Stuff that caugh my interest</description>
 <generator>quarto-1.8.26</generator>
 <lastBuildDate>Sun, 23 Nov 2025 06:00:00 GMT</lastBuildDate>
 <item>
   <title>Tanic</title>
   <dc:creator>Ezra Safi</dc:creator>
-  <link>https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/</link>
+  <link>https://thmfirst50-jpg.github.io/posts/Tanic/</link>
   <description><![CDATA[ 
 
 
@@ -66,7 +66,7 @@ This is my first-ever Kaggle competition, and I wanted to document everything I 
 <p>Start by loading the CSV into Excel.</p>
 <p><strong>Excel:</strong><br>
 <strong>Data → Get Data → From File → From Text/CSV → select <code>train.csv</code></strong></p>
-<p><img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/Images/data.jpg" class="img-fluid"></p>
+<p><img src="https://thmfirst50-jpg.github.io/posts/Tanic/Images/data.jpg" class="img-fluid"></p>
 <hr>
 <section id="data-cleaning" class="level2">
 <h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
@@ -89,7 +89,7 @@ Right-click a column → <strong>Delete → Table Columns</strong></p>
 <h3 class="anchored" data-anchor-id="remove-rows-with-missing-values"><strong>2. Remove Rows with Missing Values</strong></h3>
 <p>We can see <code>Age</code> and <code>Embarked</code> contain blanks.<br>
 For simplicity, we remove rows with missing entries.</p>
-<p><img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/Images/filtering.jpg" class="img-fluid"></p>
+<p><img src="https://thmfirst50-jpg.github.io/posts/Tanic/Images/filtering.jpg" class="img-fluid"></p>
 <div class="tip">
 <p><strong>Excel Action</strong><br>
 Filter columns → uncheck <strong>Blank</strong></p>
@@ -170,7 +170,7 @@ We convert categorical data (Sex, Embarked, Pclass) into binary indicator variab
 </tbody>
 </table>
 <p>Your table should look like this:</p>
-<p><img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/Images/one_hot.jpg" class="img-fluid"></p>
+<p><img src="https://thmfirst50-jpg.github.io/posts/Tanic/Images/one_hot.jpg" class="img-fluid"></p>
 <div class="tip">
 <p><strong>Action:</strong> Apply all the one-hot transformations</p>
 </div>
@@ -182,7 +182,7 @@ We convert categorical data (Sex, Embarked, Pclass) into binary indicator variab
 <p>Now for the fun part—creating trainable parameters.</p>
 <p>Use: =RAND() * 2 - 1</p>
 <p>This generates values in <strong>[-1, 1]</strong>.</p>
-<p><img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/Images/params.jpg" class="img-fluid"></p>
+<p><img src="https://thmfirst50-jpg.github.io/posts/Tanic/Images/params.jpg" class="img-fluid"></p>
 <div class="tip">
 <p><strong>Action:</strong> Create the parameters table</p>
 </div>
@@ -223,7 +223,7 @@ We convert categorical data (Sex, Embarked, Pclass) into binary indicator variab
 </tr>
 </tbody>
 </table>
-<p><img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/Images/loss.jpg" class="img-fluid"></p>
+<p><img src="https://thmfirst50-jpg.github.io/posts/Tanic/Images/loss.jpg" class="img-fluid"></p>
 <hr>
 </section>
 </section>
@@ -238,7 +238,7 @@ We convert categorical data (Sex, Embarked, Pclass) into binary indicator variab
 <li><strong>Non-Negative</strong> → Uncheck</li>
 </ol>
 <p>Click <strong>Solve</strong> and watch the <strong>Average Loss</strong> decrease. Congratulations, you’ve just trained a linear regression model in Excel!</p>
-<p><img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/Images/solver.jpg" class="img-fluid"> <img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/Images/solved.jpg" class="img-fluid"></p>
+<p><img src="https://thmfirst50-jpg.github.io/posts/Tanic/Images/solver.jpg" class="img-fluid"> <img src="https://thmfirst50-jpg.github.io/posts/Tanic/Images/solved.jpg" class="img-fluid"></p>
 <hr>
 </section>
 <section id="training-a-neural-network" class="level1">
@@ -426,7 +426,7 @@ Figure&nbsp;1: Neural Network Architecture
 </ul>
 <p>Click <strong>Solve</strong>, and Solver will iteratively optimize all parameters.</p>
 <p>After training, your network output should resemble:</p>
-<p><img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/Images/neural_net.jpg" class="img-fluid"></p>
+<p><img src="https://thmfirst50-jpg.github.io/posts/Tanic/Images/neural_net.jpg" class="img-fluid"></p>
 </section>
 </section>
 <section id="final-thoughts" class="level1">
@@ -443,14 +443,14 @@ Figure&nbsp;1: Neural Network Architecture
  ]]></description>
   <category>kaggle</category>
   <category>Machine Learning</category>
-  <guid>https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/</guid>
+  <guid>https://thmfirst50-jpg.github.io/posts/Tanic/</guid>
   <pubDate>Sun, 23 Nov 2025 06:00:00 GMT</pubDate>
-  <media:content url="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/titanic.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://thmfirst50-jpg.github.io/posts/Tanic/titanic.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Post With Code</title>
   <dc:creator>Ezra Safi</dc:creator>
-  <link>https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/post-with-code/</link>
+  <link>https://thmfirst50-jpg.github.io/posts/post-with-code/</link>
   <description><![CDATA[ 
 
 
@@ -518,7 +518,7 @@ font-style: inherit;">True</span>)</span>
 <div id="fig-polar" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-polar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/post-with-code/index_files/figure-html/fig-polar-output-1.png" width="450" height="439" class="figure-img">
+<img src="https://thmfirst50-jpg.github.io/posts/post-with-code/index_files/figure-html/fig-polar-output-1.png" width="450" height="439" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-polar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: A line plot on a polar axis
@@ -533,14 +533,14 @@ Figure&nbsp;1: A line plot on a polar axis
  ]]></description>
   <category>code</category>
   <category>analysis</category>
-  <guid>https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/post-with-code/</guid>
+  <guid>https://thmfirst50-jpg.github.io/posts/post-with-code/</guid>
   <pubDate>Wed, 19 Nov 2025 06:00:00 GMT</pubDate>
-  <media:content url="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/post-with-code/image.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://thmfirst50-jpg.github.io/posts/post-with-code/image.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Welcome To My Blog</title>
   <dc:creator>Ezra Safi</dc:creator>
-  <link>https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/welcome/</link>
+  <link>https://thmfirst50-jpg.github.io/posts/welcome/</link>
   <description><![CDATA[ 
 
 
@@ -553,7 +553,7 @@ Figure&nbsp;1: A line plot on a polar axis
 
  ]]></description>
   <category>news</category>
-  <guid>https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/welcome/</guid>
+  <guid>https://thmfirst50-jpg.github.io/posts/welcome/</guid>
   <pubDate>Sun, 16 Nov 2025 06:00:00 GMT</pubDate>
 </item>
 </channel>

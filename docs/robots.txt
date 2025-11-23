@@ -1,1 +1,1 @@
-Sitemap: https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/sitemap.xml
+Sitemap: https://thmfirst50-jpg.github.io/sitemap.xml
