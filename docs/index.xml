@@ -8,9 +8,445 @@
 <title>Blog</title>
 <link>https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/</link>
 <atom:link href="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/index.xml" rel="self" type="application/rss+xml"/>
-<description>A blog built with Quarto</description>
+<description>Stuff that caugh my interest</description>
 <generator>quarto-1.8.26</generator>
-<lastBuildDate>Wed, 19 Nov 2025 06:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 23 Nov 2025 06:00:00 GMT</lastBuildDate>
+<item>
+  <title>Tanic</title>
+  <dc:creator>Ezra Safi</dc:creator>
+  <link>https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Today I’ll be walking through the famous <strong>Titanic - Machine Learning from Disaster</strong> competition on Kaggle.<br>
+This is my first-ever Kaggle competition, and I wanted to document everything I learned. I hope this helps anyone starting in a similar position.</p>
+<p>If you haven’t already, check out the competition page:<br>
+👉 <a href="https://www.kaggle.com/competitions/titanic/overview" class="uri">https://www.kaggle.com/competitions/titanic/overview</a></p>
+<hr>
+</section>
+<section id="table-of-contents" class="level1">
+<h1>Table of Contents</h1>
+<ol type="1">
+<li>Downloading the Training Data<br>
+</li>
+<li>Preparing the Data
+<ul>
+<li>Data Cleaning<br>
+</li>
+<li>Data Scaling<br>
+</li>
+<li>One-Hot Encoding<br>
+</li>
+</ul></li>
+<li>Setting Up the Parameters<br>
+</li>
+<li>Loss Function<br>
+</li>
+<li>Training a Linear Regression Model<br>
+</li>
+<li>Training a Neural Network<br>
+</li>
+<li>Final Thoughts</li>
+</ol>
+<hr>
+</section>
+<section id="downloading-the-training-data" class="level1">
+<h1>Downloading the Training Data</h1>
+<p>Download both <strong>train.csv</strong> and <strong>test.csv</strong> from the Kaggle data section:</p>
+<p>👉 <a href="https://www.kaggle.com/competitions/titanic/data" class="uri">https://www.kaggle.com/competitions/titanic/data</a></p>
+<hr>
+</section>
+<section id="preparing-data" class="level1">
+<h1>Preparing Data</h1>
+<p>Start by loading the CSV into Excel.</p>
+<p><strong>Excel:</strong><br>
+<strong>Data → Get Data → From File → From Text/CSV → select <code>train.csv</code></strong></p>
+<p><img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/Images/data.jpg" class="img-fluid"></p>
+<hr>
+<section id="data-cleaning" class="level2">
+<h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
+<blockquote class="blockquote">
+<p><strong>“Garbage in, garbage out.”</strong><br>
+Clean data is essential for model accuracy.</p>
+</blockquote>
+<section id="remove-unnecessary-columns" class="level3">
+<h3 class="anchored" data-anchor-id="remove-unnecessary-columns"><strong>1. Remove Unnecessary Columns</strong></h3>
+<p>Identifiers like <strong>PassengerId</strong> or <strong>Ticket</strong> do not help predict survival.</p>
+<p>We will keep:</p>
+<p><strong>survived, pclass, age, sex, sibsp, parch, fare, embarked</strong></p>
+<div class="tip">
+<p><strong>Excel Action</strong><br>
+Right-click a column → <strong>Delete → Table Columns</strong></p>
+</div>
+<hr>
+</section>
+<section id="remove-rows-with-missing-values" class="level3">
+<h3 class="anchored" data-anchor-id="remove-rows-with-missing-values"><strong>2. Remove Rows with Missing Values</strong></h3>
+<p>We can see <code>Age</code> and <code>Embarked</code> contain blanks.<br>
+For simplicity, we remove rows with missing entries.</p>
+<p><img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/Images/filtering.jpg" class="img-fluid"></p>
+<div class="tip">
+<p><strong>Excel Action</strong><br>
+Filter columns → uncheck <strong>Blank</strong></p>
+</div>
+<hr>
+</section>
+</section>
+<section id="data-scaling" class="level2">
+<h2 class="anchored" data-anchor-id="data-scaling">Data Scaling</h2>
+<p>Some features (like Fare) have much larger numerical ranges than others.<br>
+We scale them to prevent misleading the model.</p>
+<p>Create new columns:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Age_Ratio</td>
+<td>=<span class="citation" data-cites="Age">[@Age]</span> / MAX([Age])</td>
+</tr>
+<tr class="even">
+<td>Fare_Log</td>
+<td>=LOG10(<span class="citation" data-cites="Fare">[@Fare]</span> + 1)</td>
+</tr>
+<tr class="odd">
+<td>Ones</td>
+<td>=1</td>
+</tr>
+</tbody>
+</table>
+<div class="tip">
+<p><strong>Excel Action:</strong><br>
+Create the new scaled columns</p>
+</div>
+<hr>
+</section>
+<section id="one-hot-encoding" class="level2">
+<h2 class="anchored" data-anchor-id="one-hot-encoding">One-Hot Encoding</h2>
+<p>Excel models cannot work with string categories.<br>
+We convert categorical data (Sex, Embarked, Pclass) into binary indicator variables.</p>
+<p>Create the following columns:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Male</td>
+<td>=IF(<span class="citation" data-cites="Sex">[@Sex]</span>=“male”, 1, 0)</td>
+</tr>
+<tr class="even">
+<td>Pclass_1</td>
+<td>=IF(<span class="citation" data-cites="Pclass">[@Pclass]</span>=1, 1, 0)</td>
+</tr>
+<tr class="odd">
+<td>Pclass_2</td>
+<td>=IF(<span class="citation" data-cites="Pclass">[@Pclass]</span>=2, 1, 0)</td>
+</tr>
+<tr class="even">
+<td>Embark_S</td>
+<td>=IF(<span class="citation" data-cites="Embarked">[@Embarked]</span>=“S”,1,0)</td>
+</tr>
+<tr class="odd">
+<td>Embark_C</td>
+<td>=IF(<span class="citation" data-cites="Embarked">[@Embarked]</span>=“C”,1,0)</td>
+</tr>
+<tr class="even">
+<td>Ones</td>
+<td>=1</td>
+</tr>
+</tbody>
+</table>
+<p>Your table should look like this:</p>
+<p><img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/Images/one_hot.jpg" class="img-fluid"></p>
+<div class="tip">
+<p><strong>Action:</strong> Apply all the one-hot transformations</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="setting-up-the-parameters" class="level1">
+<h1>Setting Up the Parameters</h1>
+<p>Now for the fun part—creating trainable parameters.</p>
+<p>Use: =RAND() * 2 - 1</p>
+<p>This generates values in <strong>[-1, 1]</strong>.</p>
+<p><img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/Images/params.jpg" class="img-fluid"></p>
+<div class="tip">
+<p><strong>Action:</strong> Create the parameters table</p>
+</div>
+<hr>
+</section>
+<section id="loss-function" class="level1">
+<h1>Loss Function</h1>
+<p>We’ll use <strong>Mean Squared Error (MSE)</strong>:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BMSE%7D%20=%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7B1%7D%5E%7Bn%7D%20(y%20-%20%5Chat%7By%7D)%5E2%0A"></p>
+<p>Where:</p>
+<ul>
+<li><strong>y</strong> = actual (Survived)</li>
+<li><strong>ŷ</strong> = model prediction</li>
+</ul>
+<hr>
+<section id="how-do-we-compute-the-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-we-compute-the-prediction">How Do We Compute the Prediction?</h2>
+<p>To calculate the prediction in a linear regression model, we multiply the input features by their respective weights (parameters).</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Column</th>
+<th style="text-align: left;">Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Linear Prediction</td>
+<td style="text-align: left;">=SUMPRODUCT(data[@[SibSp]:[ones]], Params)</td>
+</tr>
+<tr class="even">
+<td>Loss</td>
+<td style="text-align: left;">=(data<span class="citation" data-cites="Survived">[@Survived]</span>-<span class="citation" data-cites="Prediction">[@Prediction]</span>)^2</td>
+</tr>
+<tr class="odd">
+<td>Average Loss</td>
+<td style="text-align: left;">=AVERAGE(Calculations[Loss])</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/Images/loss.jpg" class="img-fluid"></p>
+<hr>
+</section>
+</section>
+<section id="training-a-linear-regression-model" class="level1">
+<h1>Training a Linear Regression Model</h1>
+<p>Now that we’ve set up everything, we can train the model.</p>
+<p>In Excel, enable the <strong>Solver</strong> add-in and configure it as follows:</p>
+<ol type="1">
+<li><strong>Set Objective</strong> → <code>Average Loss</code></li>
+<li><strong>To</strong> → <code>Min</code></li>
+<li><strong>By Changing Variables</strong> → <code>Parameters</code></li>
+<li><strong>Non-Negative</strong> → Uncheck</li>
+</ol>
+<p>Click <strong>Solve</strong> and watch the <strong>Average Loss</strong> decrease. Congratulations, you’ve just trained a linear regression model in Excel!</p>
+<p><img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/Images/solver.jpg" class="img-fluid"> <img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/Images/solved.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="training-a-neural-network" class="level1">
+<h1>Training a Neural Network</h1>
+<p>To improve the model, we can extend it to a <strong>Neural Network</strong> by adding an additional layer and more neurons. This is similar to our linear regression model but with added complexity.</p>
+<p>Here’s an illustration of the model architecture:</p>
+<div class="cell" data-fig-width="5" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-dot" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<svg width="480" height="480" viewbox="0.00 0.00 360.08 231.85" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 227.85)">
+<title>G</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-227.85 356.08,-227.85 356.08,4 -4,4"></polygon>
+<text text-anchor="middle" x="176.04" y="-8.2" font-family="Times,serif" font-size="14.00">Neural Network</text>
+<!-- Feature 2 -->
+<g id="node1" class="node">
+<title>Feature 2</title>
+<ellipse fill="none" stroke="purple" cx="49.38" cy="-132.05" rx="47.47" ry="18"></ellipse>
+<text text-anchor="middle" x="49.38" y="-127.85" font-family="Times,serif" font-size="14.00">Feature 2</text>
+</g>
+<!-- Neuron 1 -->
+<g id="node4" class="node">
+<title>Neuron 1</title>
+<ellipse fill="none" stroke="purple" cx="192.11" cy="-79.05" rx="47.48" ry="18"></ellipse>
+<text text-anchor="middle" x="192.11" y="-74.85" font-family="Times,serif" font-size="14.00">Neuron 1</text>
+</g>
+<!-- Feature 2&#45;&gt;Neuron 1 -->
+<g id="edge1" class="edge">
+<title>Feature 2-&gt;Neuron 1</title>
+<path fill="none" stroke="red" d="M65.2,-114.89C80.73,-97.42 104.53,-72.23 116.76,-67.25 126.58,-63.25 137.63,-62.97 148.16,-64.45"></path>
+<polygon fill="red" stroke="red" points="147.55,-67.9 158.03,-66.35 148.87,-61.03 147.55,-67.9"></polygon>
+<text text-anchor="middle" x="121.82" y="-72.25" font-family="Times,serif" font-size="14.00">w</text>
+</g>
+<!-- Neuron 2 -->
+<g id="node5" class="node">
+<title>Neuron 2</title>
+<ellipse fill="none" stroke="purple" cx="192.11" cy="-139.05" rx="47.48" ry="18"></ellipse>
+<text text-anchor="middle" x="192.11" y="-134.85" font-family="Times,serif" font-size="14.00">Neuron 2</text>
+</g>
+<!-- Feature 2&#45;&gt;Neuron 2 -->
+<g id="edge2" class="edge">
+<title>Feature 2-&gt;Neuron 2</title>
+<path fill="none" stroke="red" d="M96.46,-134.34C108.73,-134.95 122.13,-135.62 134.88,-136.25"></path>
+<polygon fill="red" stroke="red" points="134.77,-139.75 144.93,-136.75 135.12,-132.76 134.77,-139.75"></polygon>
+<text text-anchor="middle" x="121.82" y="-139.25" font-family="Times,serif" font-size="14.00">w</text>
+</g>
+<!-- Feature 1 -->
+<g id="node2" class="node">
+<title>Feature 1</title>
+<ellipse fill="none" stroke="purple" cx="49.38" cy="-199.05" rx="47.47" ry="18"></ellipse>
+<text text-anchor="middle" x="49.38" y="-194.85" font-family="Times,serif" font-size="14.00">Feature 1</text>
+</g>
+<!-- Feature 1&#45;&gt;Neuron 1 -->
+<g id="edge3" class="edge">
+<title>Feature 1-&gt;Neuron 1</title>
+<path fill="none" stroke="red" d="M83.49,-186.42C98.37,-179.36 115.17,-169.29 126.87,-156.05 140.86,-140.21 131.76,-128.61 144.87,-112.05 148.32,-107.7 152.48,-103.67 156.88,-100.02"></path>
+<polygon fill="red" stroke="red" points="159.1,-102.73 164.95,-93.9 154.87,-97.16 159.1,-102.73"></polygon>
+<text text-anchor="middle" x="121.82" y="-168.25" font-family="Times,serif" font-size="14.00">w</text>
+</g>
+<!-- Feature 1&#45;&gt;Neuron 2 -->
+<g id="edge4" class="edge">
+<title>Feature 1-&gt;Neuron 2</title>
+<path fill="none" stroke="red" d="M90.03,-208.35C102.23,-209.46 115.45,-208.82 126.87,-204.05 145.97,-196.07 162.28,-179.36 173.68,-164.87"></path>
+<polygon fill="red" stroke="red" points="176.62,-166.79 179.82,-156.69 171.02,-162.59 176.62,-166.79"></polygon>
+<text text-anchor="middle" x="121.82" y="-211.25" font-family="Times,serif" font-size="14.00">w</text>
+</g>
+<!-- Feature N -->
+<g id="node3" class="node">
+<title>Feature N</title>
+<ellipse fill="none" stroke="purple" cx="49.38" cy="-52.05" rx="49.26" ry="18"></ellipse>
+<text text-anchor="middle" x="49.38" y="-47.85" font-family="Times,serif" font-size="14.00">Feature N</text>
+</g>
+<!-- Feature N&#45;&gt;Neuron 1 -->
+<g id="edge5" class="edge">
+<title>Feature N-&gt;Neuron 1</title>
+<path fill="none" stroke="red" d="M73.92,-36.28C89.1,-28.11 109.23,-21.02 126.87,-27.25 142.68,-32.83 157.46,-44.13 168.84,-54.75"></path>
+<polygon fill="red" stroke="red" points="166.57,-57.42 176.16,-61.92 171.47,-52.42 166.57,-57.42"></polygon>
+<text text-anchor="middle" x="121.82" y="-32.25" font-family="Times,serif" font-size="14.00">w</text>
+</g>
+<!-- Feature N&#45;&gt;Neuron 2 -->
+<g id="edge6" class="edge">
+<title>Feature N-&gt;Neuron 2</title>
+<path fill="none" stroke="red" d="M75.22,-67.4C98.23,-81.63 132.62,-102.89 157.97,-118.56"></path>
+<polygon fill="red" stroke="red" points="156.18,-121.57 166.53,-123.85 159.86,-115.61 156.18,-121.57"></polygon>
+<text text-anchor="middle" x="121.82" y="-102.25" font-family="Times,serif" font-size="14.00">w</text>
+</g>
+<!-- Output -->
+<g id="node6" class="node">
+<title>Output</title>
+<ellipse fill="none" stroke="purple" cx="314.22" cy="-105.05" rx="37.72" ry="18"></ellipse>
+<text text-anchor="middle" x="314.22" y="-100.85" font-family="Times,serif" font-size="14.00">Output</text>
+</g>
+<!-- Neuron 1&#45;&gt;Output -->
+<g id="edge7" class="edge">
+<title>Neuron 1-&gt;Output</title>
+<path fill="none" stroke="red" d="M233.44,-87.78C244.93,-90.27 257.5,-92.99 269.2,-95.52"></path>
+<polygon fill="red" stroke="red" points="268.69,-98.99 279.21,-97.69 270.17,-92.15 268.69,-98.99"></polygon>
+</g>
+<!-- Neuron 2&#45;&gt;Output -->
+<g id="edge8" class="edge">
+<title>Neuron 2-&gt;Output</title>
+<path fill="none" stroke="red" d="M230.46,-128.48C243.41,-124.81 258.01,-120.68 271.3,-116.91"></path>
+<polygon fill="red" stroke="red" points="272.5,-120.21 281.16,-114.12 270.59,-113.48 272.5,-120.21"></polygon>
+</g>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Neural Network Architecture
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="adding-a-second-neuron" class="level2">
+<h2 class="anchored" data-anchor-id="adding-a-second-neuron">Adding a Second Neuron</h2>
+<p>After defining the network structure, we need to adjust our Excel setup to support <strong>multiple neurons</strong>, each with its own set of parameters and activation outputs.</p>
+<p>Since our neural network contains <strong>two hidden neurons</strong>, expand the parameters table accordingly:</p>
+<ul>
+<li>Add a <strong>second row of weights</strong> (one weight per input feature).</li>
+<li>Include a second <strong>bias term</strong>.</li>
+</ul>
+<p>A typical expanded parameter table looks like this:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Neuron</th>
+<th>Weight 1</th>
+<th>Weight 2</th>
+<th>…</th>
+<th>Weight N</th>
+<th>Bias</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>w_11</td>
+<td>w_12</td>
+<td>…</td>
+<td>w_1N</td>
+<td>b_1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>w_21</td>
+<td>w_22</td>
+<td>…</td>
+<td>w_2N</td>
+<td>b_2</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="applying-the-activation-function" class="level2">
+<h2 class="anchored" data-anchor-id="applying-the-activation-function">Applying the Activation Function</h2>
+<p>Each neuron’s output must be passed through a <strong>sigmoid activation function</strong>, which compresses values into the 0–1 range:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Csigma(y)%20=%20%5Cfrac%7B1%7D%7B1%20+%20e%5E%7B-y%7D%7D%0A"></p>
+<p>In Excel, implement this as: <code>=1/(1+EXP(-[Linear Output]))</code></p>
+</section>
+<section id="training-the-neural-network" class="level2">
+<h2 class="anchored" data-anchor-id="training-the-neural-network">Training the Neural Network</h2>
+<p>The loss function remains the same <strong>Mean Squared Error (MSE)</strong>:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AL%20=%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi=1%7D%5E%7Bn%7D(y%20-%20%5Chat%7By%7D)%5E2%0A"></p>
+<p>To train the full neural network in Excel, configure Solver:</p>
+<ul>
+<li><strong>Set Objective:</strong> <code>Average Loss</code></li>
+<li><strong>To:</strong> Minimize<br>
+</li>
+<li><strong>By Changing Variables:</strong>
+<ul>
+<li>All weights for Neuron 1<br>
+</li>
+<li>All weights for Neuron 2<br>
+</li>
+<li>All bias terms<br>
+</li>
+</ul></li>
+<li><strong>Non-Negative Constraint:</strong> Off (leave unchecked)</li>
+</ul>
+<p>Click <strong>Solve</strong>, and Solver will iteratively optimize all parameters.</p>
+<p>After training, your network output should resemble:</p>
+<p><img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/Images/neural_net.jpg" class="img-fluid"></p>
+</section>
+</section>
+<section id="final-thoughts" class="level1">
+<h1>Final Thoughts</h1>
+<p>Working through this challenge brought from being completely unfamiliar with Machine Learning to being able to train a fully capable model. I’m simply mind blown that something like this can be done on Excel. I would highly recommend this kaggle challenge for anyone wanting to learn more about machine learning.</p>
+</section>
+<section id="download-the-excel-workbook" class="level1">
+<h1>Download the Excel Workbook</h1>
+<p><a href="excel/titanic_model.xlsx" download="" class="btn btn-primary"> Download Excel File </a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>kaggle</category>
+  <category>Machine Learning</category>
+  <guid>https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/</guid>
+  <pubDate>Sun, 23 Nov 2025 06:00:00 GMT</pubDate>
+  <media:content url="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/Tanic/titanic.jpg" medium="image" type="image/jpeg"/>
+</item>
 <item>
   <title>Post With Code</title>
   <dc:creator>Ezra Safi</dc:creator>
@@ -103,7 +539,7 @@ Figure&nbsp;1: A line plot on a polar axis
 </item>
 <item>
   <title>Welcome To My Blog</title>
-  <dc:creator>Tristan O&#39;Malley</dc:creator>
+  <dc:creator>Ezra Safi</dc:creator>
   <link>https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/welcome/</link>
   <description><![CDATA[ 
 
@@ -112,8 +548,6 @@ Figure&nbsp;1: A line plot on a polar axis
 
 
 <p>This is the first post in a Quarto blog. Welcome!</p>
-<p><img src="https://github.com/thmfirst50-jpg/thmfirst50-jpg.github.io/posts/welcome/thumbnail.jpg" class="img-fluid"></p>
-<p>Since this post doesn’t specify an explicit <code>image</code>, the first image in the post will be used in the listing page of posts.</p>
 
 
 
