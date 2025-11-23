@@ -4,63 +4,14 @@
     "href": "index.html",
     "title": "Blog Page",
     "section": "",
-    "text": "Tanic\n\n\n\nkaggle\n\nMachine Learning\n\n\n\nTitanic - Machine Learning from Disaster Walkthrough with Excel\n\n\n\n\n\nNov 23, 2025\n\n\nEzra Safi\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\ncode\n\nanalysis\n\n\n\n\n\n\n\n\n\nNov 19, 2025\n\n\nEzra Safi\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nNov 16, 2025\n\n\nEzra Safi\n\n\n\n\n\nNo matching items"
+    "text": "Titanic\n\n\n\nkaggle\n\nMachine Learning\n\n\n\nTitanic - Machine Learning from Disaster Walkthrough with Excel\n\n\n\n\n\nNov 23, 2025\n\n\nEzra Safi\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\ncode\n\nanalysis\n\n\n\n\n\n\n\n\n\nNov 19, 2025\n\n\nEzra Safi\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nNov 16, 2025\n\n\nEzra Safi\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "posts/Tanic/index.html",
-    "href": "posts/Tanic/index.html",
-    "title": "Tanic",
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
     "section": "",
-    "text": "Today I’ll be walking through the famous Titanic - Machine Learning from Disaster competition on Kaggle.\nThis is my first-ever Kaggle competition, and I wanted to document everything I learned. I hope this helps anyone starting in a similar position.\nIf you haven’t already, check out the competition page:\n👉 https://www.kaggle.com/competitions/titanic/overview"
-  },
-  {
-    "objectID": "posts/Tanic/index.html#data-cleaning",
-    "href": "posts/Tanic/index.html#data-cleaning",
-    "title": "Tanic",
-    "section": "Data Cleaning",
-    "text": "Data Cleaning\n\n“Garbage in, garbage out.”\nClean data is essential for model accuracy.\n\n\n1. Remove Unnecessary Columns\nIdentifiers like PassengerId or Ticket do not help predict survival.\nWe will keep:\nsurvived, pclass, age, sex, sibsp, parch, fare, embarked\n\nExcel Action\nRight-click a column → Delete → Table Columns\n\n\n\n\n2. Remove Rows with Missing Values\nWe can see Age and Embarked contain blanks.\nFor simplicity, we remove rows with missing entries.\n\n\nExcel Action\nFilter columns → uncheck Blank"
-  },
-  {
-    "objectID": "posts/Tanic/index.html#data-scaling",
-    "href": "posts/Tanic/index.html#data-scaling",
-    "title": "Tanic",
-    "section": "Data Scaling",
-    "text": "Data Scaling\nSome features (like Fare) have much larger numerical ranges than others.\nWe scale them to prevent misleading the model.\nCreate new columns:\n\n\n\nColumn\nFormula\n\n\n\n\nAge_Ratio\n=[@Age] / MAX([Age])\n\n\nFare_Log\n=LOG10([@Fare] + 1)\n\n\nOnes\n=1\n\n\n\n\nExcel Action:\nCreate the new scaled columns"
-  },
-  {
-    "objectID": "posts/Tanic/index.html#one-hot-encoding",
-    "href": "posts/Tanic/index.html#one-hot-encoding",
-    "title": "Tanic",
-    "section": "One-Hot Encoding",
-    "text": "One-Hot Encoding\nExcel models cannot work with string categories.\nWe convert categorical data (Sex, Embarked, Pclass) into binary indicator variables.\nCreate the following columns:\n\n\n\nColumn\nFormula\n\n\n\n\nMale\n=IF([@Sex]=“male”, 1, 0)\n\n\nPclass_1\n=IF([@Pclass]=1, 1, 0)\n\n\nPclass_2\n=IF([@Pclass]=2, 1, 0)\n\n\nEmbark_S\n=IF([@Embarked]=“S”,1,0)\n\n\nEmbark_C\n=IF([@Embarked]=“C”,1,0)\n\n\nOnes\n=1\n\n\n\nYour table should look like this:\n\n\nAction: Apply all the one-hot transformations"
-  },
-  {
-    "objectID": "posts/Tanic/index.html#how-do-we-compute-the-prediction",
-    "href": "posts/Tanic/index.html#how-do-we-compute-the-prediction",
-    "title": "Tanic",
-    "section": "How Do We Compute the Prediction?",
-    "text": "How Do We Compute the Prediction?\nTo calculate the prediction in a linear regression model, we multiply the input features by their respective weights (parameters).\n\n\n\nColumn\nFormula\n\n\n\n\nLinear Prediction\n=SUMPRODUCT(data[@[SibSp]:[ones]], Params)\n\n\nLoss\n=(data[@Survived]-[@Prediction])^2\n\n\nAverage Loss\n=AVERAGE(Calculations[Loss])"
-  },
-  {
-    "objectID": "posts/Tanic/index.html#adding-a-second-neuron",
-    "href": "posts/Tanic/index.html#adding-a-second-neuron",
-    "title": "Tanic",
-    "section": "Adding a Second Neuron",
-    "text": "Adding a Second Neuron\nAfter defining the network structure, we need to adjust our Excel setup to support multiple neurons, each with its own set of parameters and activation outputs.\nSince our neural network contains two hidden neurons, expand the parameters table accordingly:\n\nAdd a second row of weights (one weight per input feature).\nInclude a second bias term.\n\nA typical expanded parameter table looks like this:\n\n\n\nNeuron\nWeight 1\nWeight 2\n…\nWeight N\nBias\n\n\n\n\n1\nw_11\nw_12\n…\nw_1N\nb_1\n\n\n2\nw_21\nw_22\n…\nw_2N\nb_2"
-  },
-  {
-    "objectID": "posts/Tanic/index.html#applying-the-activation-function",
-    "href": "posts/Tanic/index.html#applying-the-activation-function",
-    "title": "Tanic",
-    "section": "Applying the Activation Function",
-    "text": "Applying the Activation Function\nEach neuron’s output must be passed through a sigmoid activation function, which compresses values into the 0–1 range:\n\n\\sigma(y) = \\frac{1}{1 + e^{-y}}\n\nIn Excel, implement this as: =1/(1+EXP(-[Linear Output]))"
-  },
-  {
-    "objectID": "posts/Tanic/index.html#training-the-neural-network",
-    "href": "posts/Tanic/index.html#training-the-neural-network",
-    "title": "Tanic",
-    "section": "Training the Neural Network",
-    "text": "Training the Neural Network\nThe loss function remains the same Mean Squared Error (MSE):\n\nL = \\frac{1}{n}\\sum_{i=1}^{n}(y - \\hat{y})^2\n\nTo train the full neural network in Excel, configure Solver:\n\nSet Objective: Average Loss\nTo: Minimize\n\nBy Changing Variables:\n\nAll weights for Neuron 1\n\nAll weights for Neuron 2\n\nAll bias terms\n\n\nNon-Negative Constraint: Off (leave unchecked)\n\nClick Solve, and Solver will iteratively optimize all parameters.\nAfter training, your network output should resemble:"
+    "text": "This is a post with executable codes.\nFor a demonstration of a line plot on a polar axis, see Figure 1.\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(\n  subplot_kw = {'projection': 'polar'} \n)\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n\n\n\n\n\n\nFigure 1: A line plot on a polar axis"
   },
   {
     "objectID": "posts/welcome/index.html",
@@ -70,11 +21,60 @@
     "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
   },
   {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
+    "objectID": "posts/Titanic/index.html",
+    "href": "posts/Titanic/index.html",
+    "title": "Titanic",
     "section": "",
-    "text": "This is a post with executable codes.\nFor a demonstration of a line plot on a polar axis, see Figure 1.\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(\n  subplot_kw = {'projection': 'polar'} \n)\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n\n\n\n\n\n\nFigure 1: A line plot on a polar axis"
+    "text": "Today I’ll be walking through the famous Titanic - Machine Learning from Disaster competition on Kaggle.\nThis is my first-ever Kaggle competition, and I wanted to document everything I learned. I hope this helps anyone starting in a similar position.\nIf you haven’t already, check out the competition page:\n👉 https://www.kaggle.com/competitions/titanic/overview"
+  },
+  {
+    "objectID": "posts/Titanic/index.html#data-cleaning",
+    "href": "posts/Titanic/index.html#data-cleaning",
+    "title": "Titanic",
+    "section": "Data Cleaning",
+    "text": "Data Cleaning\n\n“Garbage in, garbage out.”\nClean data is essential for model accuracy.\n\n\n1. Remove Unnecessary Columns\nIdentifiers like PassengerId or Ticket do not help predict survival.\nWe will keep:\nsurvived, pclass, age, sex, sibsp, parch, fare, embarked\n\nExcel Action\nRight-click a column → Delete → Table Columns\n\n\n\n\n2. Remove Rows with Missing Values\nWe can see Age and Embarked contain blanks.\nFor simplicity, we remove rows with missing entries.\n\n\nExcel Action\nFilter columns → uncheck Blank"
+  },
+  {
+    "objectID": "posts/Titanic/index.html#data-scaling",
+    "href": "posts/Titanic/index.html#data-scaling",
+    "title": "Titanic",
+    "section": "Data Scaling",
+    "text": "Data Scaling\nSome features (like Fare) have much larger numerical ranges than others.\nWe scale them to prevent misleading the model.\nCreate new columns:\n\n\n\nColumn\nFormula\n\n\n\n\nAge_Ratio\n=[@Age] / MAX([Age])\n\n\nFare_Log\n=LOG10([@Fare] + 1)\n\n\nOnes\n=1\n\n\n\n\nExcel Action:\nCreate the new scaled columns"
+  },
+  {
+    "objectID": "posts/Titanic/index.html#one-hot-encoding",
+    "href": "posts/Titanic/index.html#one-hot-encoding",
+    "title": "Titanic",
+    "section": "One-Hot Encoding",
+    "text": "One-Hot Encoding\nExcel models cannot work with string categories.\nWe convert categorical data (Sex, Embarked, Pclass) into binary indicator variables.\nCreate the following columns:\n\n\n\nColumn\nFormula\n\n\n\n\nMale\n=IF([@Sex]=“male”, 1, 0)\n\n\nPclass_1\n=IF([@Pclass]=1, 1, 0)\n\n\nPclass_2\n=IF([@Pclass]=2, 1, 0)\n\n\nEmbark_S\n=IF([@Embarked]=“S”,1,0)\n\n\nEmbark_C\n=IF([@Embarked]=“C”,1,0)\n\n\nOnes\n=1\n\n\n\nYour table should look like this:\n\n\nAction: Apply all the one-hot transformations"
+  },
+  {
+    "objectID": "posts/Titanic/index.html#how-do-we-compute-the-prediction",
+    "href": "posts/Titanic/index.html#how-do-we-compute-the-prediction",
+    "title": "Titanic",
+    "section": "How Do We Compute the Prediction?",
+    "text": "How Do We Compute the Prediction?\nTo calculate the prediction in a linear regression model, we multiply the input features by their respective weights (parameters).\n\n\n\nColumn\nFormula\n\n\n\n\nLinear Prediction\n=SUMPRODUCT(data[@[SibSp]:[ones]], Params)\n\n\nLoss\n=(data[@Survived]-[@Prediction])^2\n\n\nAverage Loss\n=AVERAGE(Calculations[Loss])"
+  },
+  {
+    "objectID": "posts/Titanic/index.html#adding-a-second-neuron",
+    "href": "posts/Titanic/index.html#adding-a-second-neuron",
+    "title": "Titanic",
+    "section": "Adding a Second Neuron",
+    "text": "Adding a Second Neuron\nAfter defining the network structure, we need to adjust our Excel setup to support multiple neurons, each with its own set of parameters and activation outputs.\nSince our neural network contains two hidden neurons, expand the parameters table accordingly:\n\nAdd a second row of weights (one weight per input feature).\nInclude a second bias term.\n\nA typical expanded parameter table looks like this:\n\n\n\nNeuron\nWeight 1\nWeight 2\n…\nWeight N\nBias\n\n\n\n\n1\nw_11\nw_12\n…\nw_1N\nb_1\n\n\n2\nw_21\nw_22\n…\nw_2N\nb_2"
+  },
+  {
+    "objectID": "posts/Titanic/index.html#applying-the-activation-function",
+    "href": "posts/Titanic/index.html#applying-the-activation-function",
+    "title": "Titanic",
+    "section": "Applying the Activation Function",
+    "text": "Applying the Activation Function\nEach neuron’s output must be passed through a sigmoid activation function, which compresses values into the 0–1 range:\n\n\\sigma(y) = \\frac{1}{1 + e^{-y}}\n\nIn Excel, implement this as: =1/(1+EXP(-[Linear Output]))"
+  },
+  {
+    "objectID": "posts/Titanic/index.html#training-the-neural-network",
+    "href": "posts/Titanic/index.html#training-the-neural-network",
+    "title": "Titanic",
+    "section": "Training the Neural Network",
+    "text": "Training the Neural Network\nThe loss function remains the same Mean Squared Error (MSE):\n\nL = \\frac{1}{n}\\sum_{i=1}^{n}(y - \\hat{y})^2\n\nTo train the full neural network in Excel, configure Solver:\n\nSet Objective: Average Loss\nTo: Minimize\n\nBy Changing Variables:\n\nAll weights for Neuron 1\n\nAll weights for Neuron 2\n\nAll bias terms\n\n\nNon-Negative Constraint: Off (leave unchecked)\n\nClick Solve, and Solver will iteratively optimize all parameters.\nAfter training, your network output should resemble:"
   },
   {
     "objectID": "about.html",
