@@ -1,6 +1,6 @@
 # Hi, I'm Safi 👋
 
-[![Live Portfolio](https://img.shields.io/badge/Live%20Portfolio-Visit%20Website-090B0E?style=for-the-badge&logo=googlechrome&logoColor=white)](https://thmfirst50-jpg.github.io/thmfirst50-jpg/)
+[![Live Portfolio](https://img.shields.io/badge/Live%20Portfolio-Visit%20Website-090B0E?style=for-the-badge&logo=googlechrome&logoColor=white)](https://thmfirst50-jpg.github.io/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Ezra%20Safi-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/safi0/)
 
 🎓 **Computer/Electrical Engineering Student @ University of Houston**
@@ -20,7 +20,7 @@ I'm passionate about **Machine Learning, Embedded Systems, Robotics, and Compute
 ## 🌐 Live Portfolio Website
 
 My interactive engineering portfolio is hosted live via GitHub Pages:  
-👉 **[thmfirst50-jpg.github.io/thmfirst50-jpg](https://thmfirst50-jpg.github.io/thmfirst50-jpg/)**
+👉 **[thmfirst50-jpg.github.io](https://thmfirst50-jpg.github.io/)**
 
 ### 📁 Structure
 ```
@@ -37,6 +37,6 @@ My interactive engineering portfolio is hosted live via GitHub Pages:
 
 ## 📫 Connect
 
-- 🌐 Website: [https://thmfirst50-jpg.github.io/thmfirst50-jpg/](https://thmfirst50-jpg.github.io/thmfirst50-jpg/)
+- 🌐 Website: [https://thmfirst50-jpg.github.io/](https://thmfirst50-jpg.github.io/)
 - 💼 LinkedIn: [https://linkedin.com/in/safi0/](https://linkedin.com/in/safi0/)
 - 📧 Email: [safi.ezra@gmail.com](mailto:safi.ezra@gmail.com)
