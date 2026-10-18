@@ -52,18 +52,39 @@
           <div class="rule"></div>
         </div>
 
-        <!-- Filter Controls -->
-        <div class="filters" role="group" aria-label="Project filter categories">
-          <button class="filter" type="button" data-filter="all" aria-pressed="true">All (6)</button>
-          <button class="filter" type="button" data-filter="embedded" aria-pressed="false">Embedded &amp; Robotics</button>
-          <button class="filter" type="button" data-filter="hardware" aria-pressed="false">Hardware &amp; Circuits</button>
-          <button class="filter" type="button" data-filter="ai-ml" aria-pressed="false">AI &amp; Machine Learning</button>
-          <button class="filter" type="button" data-filter="software" aria-pressed="false">Full-Stack &amp; Software</button>
+        <!-- Controls Bar: Category Filters & Layout Switcher -->
+        <div class="projects-bar">
+          <div class="filters" role="group" aria-label="Project filter categories">
+            <button class="filter" type="button" data-filter="all" aria-pressed="true">All (6)</button>
+            <button class="filter" type="button" data-filter="embedded" aria-pressed="false">Embedded &amp; Robotics</button>
+            <button class="filter" type="button" data-filter="hardware" aria-pressed="false">Hardware &amp; Circuits</button>
+            <button class="filter" type="button" data-filter="ai-ml" aria-pressed="false">AI &amp; Machine Learning</button>
+            <button class="filter" type="button" data-filter="software" aria-pressed="false">Full-Stack &amp; Software</button>
+          </div>
+
+          <div class="layout-switch" role="group" aria-label="Project layout mode">
+            <span class="layout-switch__label">Layout</span>
+            <div class="layout-switch__group">
+              <button class="layout-btn" type="button" data-layout="2" aria-pressed="true" title="Two Columns — Grid view">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="1.5" y="2" width="5.5" height="12" rx="1" />
+                  <rect x="9" y="2" width="5.5" height="12" rx="1" />
+                </svg>
+                <span>2 Col</span>
+              </button>
+              <button class="layout-btn" type="button" data-layout="1" aria-pressed="false" title="One Column — Showcase / Presentation view">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="1.5" y="2" width="13" height="12" rx="1" />
+                </svg>
+                <span>1 Col &middot; Showcase</span>
+              </button>
+            </div>
+          </div>
         </div>
         <div class="filter-count" id="filterCount">Showing 6 of 6 projects</div>
 
         <!-- Project Grid -->
-        <div class="projects-grid" id="projectGrid">
+        <div class="projects-grid" id="projectGrid" data-layout="2">
 
           <!-- Project 1: Micromouse Maze-Solving Robot -->
           <article class="card reveal" id="proj-micromouse" data-category="embedded hardware">

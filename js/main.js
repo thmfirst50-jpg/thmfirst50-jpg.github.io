@@ -173,6 +173,46 @@
   }
 
   /* ----------------------------------------------------------------
+     4.1 Project Layout Switcher (1-Col Showcase vs 2-Col Grid)
+  ---------------------------------------------------------------- */
+  var projectGrid = $('#projectGrid');
+  var layoutBtns = $$('.layout-btn');
+  var LAYOUT_STORAGE_KEY = 'portfolio_layout_mode';
+
+  function setLayout(cols) {
+    if (!projectGrid) return;
+    var mode = (cols === '1' || cols === 1) ? '1' : '2';
+    projectGrid.setAttribute('data-layout', mode);
+
+    layoutBtns.forEach(function (btn) {
+      var isCurrent = btn.getAttribute('data-layout') === mode;
+      btn.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
+    });
+
+    try {
+      localStorage.setItem(LAYOUT_STORAGE_KEY, mode);
+    } catch (e) {}
+  }
+
+  if (projectGrid && layoutBtns.length) {
+    var initialMode = '2';
+    try {
+      var saved = localStorage.getItem(LAYOUT_STORAGE_KEY);
+      if (saved === '1' || saved === '2') {
+        initialMode = saved;
+      }
+    } catch (e) {}
+
+    setLayout(initialMode);
+
+    layoutBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        setLayout(btn.getAttribute('data-layout'));
+      });
+    });
+  }
+
+  /* ----------------------------------------------------------------
      4.5 In-Card Image Carousels
   ---------------------------------------------------------------- */
   $$('[data-gallery]').forEach(function (g) {
