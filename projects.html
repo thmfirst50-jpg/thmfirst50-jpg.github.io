@@ -50,9 +50,6 @@
           <span class="eyebrow">Portfolio Index</span>
           <h2 class="sec-title">Featured Projects</h2>
           <div class="rule"></div>
-          <p class="sec-sub">
-            A curated collection of verified engineering projects across embedded robotics, computer vision, discrete digital electronics, and full-stack software. Click any image to open the fullscreen lightbox viewer.
-          </p>
         </div>
 
         <!-- Filter Controls -->
@@ -102,13 +99,8 @@
 
             <div class="card__metric">⚡ 100 Hz PID Loop &middot; &le;1 mm Stopping Accuracy &middot; ~500 mm/s Speed</div>
             <p class="card__desc">
-              Custom-built autonomous maze-solving robot featuring custom PCB hardware, SMD soldering, and low-latency C/C++ closed-loop feedback firmware.
+              An autonomous maze-solving robot built from scratch with a custom KiCad PCB and C/C++ firmware. It uses infrared distance sensors, wheel encoders, and a closed-loop PID control loop to navigate unknown mazes and calculate optimal paths in real time.
             </p>
-            <ul class="card__bullets">
-              <li>Designed and assembled a custom KiCad PCB with surface-mount (SMD) components, integrating IR distance sensors, rotary encoders, dual motor drivers, and an Arduino-based embedded controller.</li>
-              <li>Developed C/C++ firmware featuring a 100 Hz PID motion-control loop and closed-loop encoder/IR feedback, achieving &le;1 mm stopping accuracy and navigation speeds up to ~500 mm/s.</li>
-              <li>Implemented localization, wall-following, maze exploration, and shortest-path floodfill algorithms for autonomous navigation and optimized competition maze runs.</li>
-            </ul>
 
             <div class="stack">
               <span class="chip">C / C++</span>
@@ -148,13 +140,8 @@
 
             <div class="card__metric">🎯 10,000+ Evaluated Images &middot; Real-Time Async Inference Pipeline</div>
             <p class="card__desc">
-              FastAPI and YOLO computer vision backend that processes live CCTV camera feeds to classify individual parking spaces as free or occupied.
+              A real-time computer vision system built with FastAPI, OpenCV, and YOLOv8 that processes live CCTV video streams to detect available parking spots and broadcast live occupancy data to a web dashboard.
             </p>
-            <ul class="card__bullets">
-              <li>Developed an asynchronous computer-vision inference service with FastAPI, YOLO (YOLOv8), and OpenCV that ingests live CCTV video feeds to classify individual parking spaces.</li>
-              <li>Built an asynchronous inference pipeline accepting parking lot identifiers and images, returning real-time occupancy coordinates for a live web dashboard.</li>
-              <li>Trained and evaluated the detection pipeline on 10,000+ parking images to classify individual space occupancy under diverse lighting and weather conditions.</li>
-            </ul>
 
             <div class="stack">
               <span class="chip">Python</span>
@@ -207,13 +194,8 @@
 
             <div class="card__metric">📲 Real-Time WebSocket Rooms &middot; 4-Tier RBAC &middot; Progressive Web App</div>
             <p class="card__desc">
-              Real-time QR-code-based student dismissal Progressive Web App coordinating pickup logistics between teachers, office staff, and pickup doors.
+              A full-stack Progressive Web App built with Python, Flask, SQLite, and WebSockets that streamlines student dismissal with in-browser QR code scanning, role-based access, and instant queue updates across classrooms and pickup stations.
             </p>
-            <ul class="card__bullets">
-              <li>Built a full-stack real-time dismissal PWA with Python, Flask, SQLite, and Socket.IO, establishing room-based WebSocket event routing for instant updates across teacher dashboards and live door displays.</li>
-              <li>Implemented role-based access control (RBAC) across Admin, Teacher, Scanner, and Door user tiers using secure session management and database relationships.</li>
-              <li>Integrated in-browser QR scanning using html5-qrcode and packaged the application as an installable PWA for dedicated mobile and tablet scanner stations.</li>
-            </ul>
 
             <div class="stack">
               <span class="chip">Python</span>
@@ -266,13 +248,8 @@
 
             <div class="card__metric">🔌 63 Discrete BJTs &middot; 190+ Resistors &middot; 7 Stacked Prototype Layers &middot; 0 ICs</div>
             <p class="card__desc">
-              Physical 8-bit binary arithmetic calculator built purely from individual discrete components across seven stacked breadboard layers with zero integrated circuits.
+              A physical 8-bit binary calculator built entirely from individual discrete components with zero integrated circuit chips. Synthesized from 63 BJT transistors and 190+ resistors across seven stacked breadboard layers, it performs hardware-level binary addition using pure NAND logic and LED state indicators.
             </p>
-            <ul class="card__bullets">
-              <li>Constructed full-adders synthesized from 63 discrete BJT transistors and 190+ resistors, building up arithmetic logic exclusively from NAND-based transistor switching.</li>
-              <li>Designed and routed carry-bit propagation across seven stacked breadboard layers to produce binary addition outputs up to 255.</li>
-              <li>Integrated discrete LED indicators to display final binary states and validated switching speeds and logic voltage thresholds.</li>
-            </ul>
 
             <div class="stack">
               <span class="chip">Discrete BJTs (63)</span>
@@ -323,13 +300,8 @@
 
             <div class="card__metric">📄 510 Commercial Contracts &middot; 41 Clause Categories &middot; Transformer Encoders</div>
             <p class="card__desc">
-              Automated legal contract review and risk-scoring pipeline developed in partnership with Accenture industry advisors for the Break Through Tech AI Studio.
+              An automated legal contract review pipeline developed in partnership with Accenture industry advisors. It fine-tunes transformer models across 510 commercial agreements to classify 41 clause categories and couples them with an explainable risk-scoring system for fast contract triage.
             </p>
-            <ul class="card__bullets">
-              <li>Fine-tuned transformer encoders with chunk-based tokenization to classify 41 expert-annotated legal clause categories across 510 commercial agreements from the CUAD benchmark dataset.</li>
-              <li>Engineered class-weighted loss functions and per-category threshold optimization to address severe label imbalance, evaluating with Precision, Recall, and F1 rather than raw accuracy.</li>
-              <li>Constructed an explainable rule-based risk-scoring layer categorizing detected clauses into Low, Medium, and High risk, validated via Spearman rank correlation against advisor benchmarks.</li>
-            </ul>
 
             <div class="stack">
               <span class="chip">Python</span>
@@ -368,13 +340,8 @@
 
             <div class="card__metric">💻 Modular ALU &middot; 16 &times; 8-Bit Register File &middot; Microcode Control Unit</div>
             <p class="card__desc">
-              Fully modular 8-bit central processing unit engineered from fundamental logic gates inside Logisim Evolution.
+              A fully modular 8-bit central processing unit modeled from fundamental logic gates in Logisim Evolution. It features a custom arithmetic logic unit, a 16-register file, microcode instruction sequencing, and Binary-Coded Decimal conversion driving a 7-segment display.
             </p>
-            <ul class="card__bullets">
-              <li>Designed an integrated ALU, 16 &times; 8-bit register file, program counter (PC), instruction register (IR), memory-address register (MAR), decoders, and conditional flags.</li>
-              <li>Implemented add/subtract arithmetic operations and microcode instruction sequencing through custom combinational logic and a centralized control unit.</li>
-              <li>Engineered Binary-Coded Decimal (BCD) conversion circuitry and 7-segment display logic for human-readable numeric output.</li>
-            </ul>
 
             <div class="stack">
               <span class="chip">Logisim Evolution</span>
