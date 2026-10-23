@@ -1102,6 +1102,10 @@ html.locked body {
   border-color: var(--line-hi);
 }
 
+.projects-grid[data-layout="1"] .gallery__img {
+  padding: 8px;
+}
+
 .projects-grid[data-layout="1"] .gal-nav {
   width: 48px;
   height: 48px;
@@ -1290,10 +1294,11 @@ html.locked body {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
-  background: var(--bg-2);
+  background: #080A0E;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
+  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.45);
 }
 
 .gallery__img {
@@ -1301,7 +1306,10 @@ html.locked body {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
+  padding: 4px;
+  box-sizing: border-box;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
